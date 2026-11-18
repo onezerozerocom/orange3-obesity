@@ -649,7 +649,9 @@
   .btn-main { font: inherit; font-size: 16px; font-weight: 700; border: 0; border-radius: 12px; padding: 11px 22px; cursor: pointer; background: var(--accent); color: #fff; box-shadow: none; white-space: nowrap; }
   .btn-main:hover { filter: brightness(1.12); }
   .btn-main:disabled { opacity: .6; cursor: wait; }
-  .dl { box-shadow: none; }
+  .dl { box-shadow: none; background: var(--accent); }
+  .dl:hover { filter: brightness(1.12); }
+  .dl:focus-visible { outline-color: var(--accent-weak); }
   .merge-msg { border-left: 3px solid var(--ok); }
 
   /* ── 글자 크기: 광고비-매출 v3와 똑같이 ── */
