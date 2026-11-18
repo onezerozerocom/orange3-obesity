@@ -20,7 +20,7 @@
     --ok: #2f9e44; --ok-weak: #e3f4e6; --warn: #a86400; --warn-weak: #fff3dc;
     --display: "Black Han Sans", "IBM Plex Sans KR", "Malgun Gothic", sans-serif;
     --body: "IBM Plex Sans KR", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    --mono: "IBM Plex Sans KR", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;  /* 숫자도 본문 글꼴로 */
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -151,7 +151,7 @@
   .ds-tab[aria-selected=true] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
   .ds-card { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
   .ds-card[hidden] { display: none; }
-  .ds-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .ds-top { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
   .ds-name { font-weight: 700; }
   .ds-src { font-size: 13.5px; color: var(--muted); }
   .ds-src a { color: var(--sleep); word-break: break-all; }
@@ -203,7 +203,7 @@
   .pick.str input[value="약함"]:checked + span { background: var(--muted); color: #fff; }
   .corr-guide { margin: 0 0 10px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
   .corr-guide b { color: var(--ink-2); }
-  .corr-guide .lv { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
+  .corr-guide .lv { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink-2); }
   .corr-guide i { width: 10px; height: 10px; border-radius: 3px; }
   .corr-guide i.s3 { background: var(--accent); } .corr-guide i.s2 { background: #f59f00; } .corr-guide i.s1 { background: var(--muted); }
   .check { font-size: 13.5px; margin-top: 6px; min-height: 1em; text-align: left; }
@@ -404,7 +404,7 @@
     .intro-h { font-size: 28px; }
   }
   @media print {
-    nav.missions, .pager, .pbar, .intro-sec { display: none !important; }
+    nav.missions, .pager, .tprog, .intro-sec { display: none !important; }
     .top { position: static; border: 0; background: #fff !important; color: #000; }
     .top .who input { color: #000 !important; border: 1px solid #999 !important; }
     .brand small, .prog { display: none; }
@@ -463,7 +463,7 @@
   .try .shots { margin: 4px 0 2px; }
   .try .shots .shot img { border-color: var(--line); }
   .qt th small .attr.role { font-size: 12px; padding: 0 8px; margin-top: 2px; }
-  /* STEP 6 빈칸 채우기 문장 */
+  /* 6단계 빈칸 채우기 문장 */
   .frame.fill { line-height: 2.6; font-size: 15.5px; }
   .frame.fill input.fi { display: inline-block; padding: 3px 8px; margin: 0 2px; vertical-align: middle; text-align: center; }
   .frame.fill .fi-pick { display: inline-flex; vertical-align: middle; margin: 0 2px; }
@@ -550,6 +550,146 @@
   #main .it { align-content: start; }
   @media (max-width: 860px) { #main .intro-tasks { grid-template-columns: 1fr; } }
 </style>
+
+<style>
+  /* ── v3: 깔끔하게 정리 (광고비-매출 v3와 같은 원칙): 강조색 하나, 바탕 3단계, 겹테두리·장식 줄이기 ── */
+  :root {
+    --bg: #f6f4ee; --paper: #ffffff; --field: #f3f0e8; --line: #e2ddd1; --line-2: #cfc8b8;
+    --ink: #1f1a17; --ink-2: #3f3732; --muted: #6b625b;
+    --accent: #4a3328; --accent-weak: #efe8e2;   /* 강조색: 상단바와 같은 코코아색 */
+    --gold: #e0a72e; --gold-weak: #fcf0d2; --warn: #9a6a00; --warn-weak: #fbf3dd;
+    --t1: var(--accent); --t2: var(--accent); --t3: var(--accent);
+    --t1-weak: var(--accent-weak); --t2-weak: var(--accent-weak); --t3-weak: var(--accent-weak);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14110f; --paper: #1d1916; --field: #171412; --line: #2f2925; --line-2: #3f3732;
+      --ink: #efe9e3; --ink-2: #d2c8bf; --muted: #a39890;
+      --accent: #e3c3ad; --accent-weak: #2b221d;
+      --gold: #f0b84a; --gold-weak: #33280f; --warn: #e8bb52; --warn-weak: #352a12;
+    }
+  }
+  body { background: var(--bg); }
+
+  /* 상단바: 기존 코코아색 + 금색 줄 그대로 */
+  .brand h1 { font-family: "Black Han Sans", "Do Hyeon", "Malgun Gothic", sans-serif; font-weight: 400; font-size: 1.45rem; letter-spacing: .01em; }
+  .prog b { color: var(--gold); }
+  .tprog { max-width: 1240px; margin: 0 auto; padding: 6px 18px 10px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 22px; }
+  .tp { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--hero-muted); min-width: 0; }
+  .tp b { color: var(--gold); white-space: nowrap; }
+  .tp-nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tp .bar { flex: 1 1 60px; min-width: 50px; height: 8px; border-radius: 4px; background: rgba(255,255,255,.14); overflow: hidden; }
+  .tp .bar i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #ff8a8e, #f0b84a); transition: width .4s; }
+  .tp-n { font-family: var(--mono); color: var(--hero-ink); min-width: 3.2em; text-align: right; }
+  .tp.done .tp-n::before { content: "✓ "; color: #8be0a4; }
+  @media (max-width: 860px) { .tprog { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* 왼쪽 목록: 과제 이름은 묶음 제목, 단계는 테두리 없는 두 자리 번호 */
+  nav.missions ol { gap: 2px; }
+  .phase { font-size: .74rem; color: var(--muted); margin: 16px 0 4px 10px; font-weight: 600; line-height: 1.45; }
+  .phase:first-child { margin-top: 0; }
+  .phase b { display: block; color: var(--muted); font-weight: 600; font-size: .72rem; letter-spacing: .06em; }
+  .mbtn, .mbtn.pg { grid-template-columns: 30px 1fr auto; }
+  .mbtn .no { border: 0; background: none; padding: 0; text-align: left; color: var(--muted); font-weight: 500; font-family: var(--mono); font-size: .78rem; }
+  .mbtn[aria-current="true"] { background: var(--accent-weak); box-shadow: none; }
+  .mbtn[aria-current="true"] .no { background: none; color: var(--accent); font-weight: 600; }
+  .mbtn .nm { font-weight: 500; }
+
+  /* 과제 머리: 색 띠 없이 글만 */
+  .task-banner { background: none; border: 0; box-shadow: none; padding: 0; margin: 0 0 26px; border-radius: 0; }
+  .task-banner b, .task-banner.t2 b, .task-banner.t3 b { color: var(--muted); font-size: .78rem; letter-spacing: .06em; }
+  .task-banner h2 { font-family: "Black Han Sans", "Do Hyeon", "Malgun Gothic", sans-serif; font-weight: 400; font-size: 2.1rem; line-height: 1.25; letter-spacing: .01em; margin: 2px 0 4px; }
+  .task-banner small { font-family: var(--body); font-size: .85rem; color: var(--muted); }
+  #main > section.q.task + section.q.task { border-top: 1px solid var(--line); }
+
+  /* 단계 머리 */
+  .eyebrow, .task.t1 .eyebrow, .task.t2 .eyebrow, .task.t3 .eyebrow { color: var(--accent); font-size: .8rem; }
+  .eyebrow::before { display: none; }
+  #main .q-h h3 { font-family: "Black Han Sans", "Do Hyeon", "Malgun Gothic", sans-serif; font-weight: 400; font-size: 1.8rem; line-height: 1.25; letter-spacing: .01em; }
+  @media (max-width: 860px) { #main .q-h h3 { font-size: 1.45rem; } .task-banner h2 { font-size: 1.7rem; } }
+
+  /* 문항 카드: 그림자·겹테두리 빼고 한 겹만 */
+  #main .sub { box-shadow: none; border-radius: 10px; }
+  #main .sub-t .n { background: none; color: var(--muted); padding: 0; font-weight: 600; }
+
+  /* 표: 머리줄은 베이지, 가는 가로줄만 */
+  .qt th, .t-list th { background: var(--field); color: var(--muted); font-weight: 600; font-size: 13px; border-bottom: 1px solid var(--line-2); }
+  .qt td { border-bottom: 1px solid var(--line); }
+  .df thead th { background: var(--paper); }
+  .df tbody tr:nth-child(even) { background: transparent; }
+
+  /* 위젯 이름: 점 없는 회색 이름표 */
+  #main .w { background: var(--field); border-color: var(--line); }
+  #main .w::before { display: none; }
+
+  /* 이야기 상자·안내 상자: 같은 한 겹 카드, 이름표만 금색 */
+  #main .story { box-shadow: none; border-radius: 10px; }
+  #main .story .story-t::after { background: var(--gold-weak); color: var(--warn); }
+  details.howto { box-shadow: none; }
+  details.howto summary::before { color: var(--accent); }
+  details.howto summary::after { background: #fbf0d3; color: #9a6a00; }
+  .attr.role { border-color: var(--line-2); }
+
+  /* 소개 화면 카드: 색 띠 없이 */
+  .it, .it.t2, .it.t3 { border-top: 1px solid var(--line); box-shadow: none; }
+  .it b, .it.t2 b, .it.t3 b { color: var(--muted); }
+  .it small { font-family: var(--body); }
+  .intro-card .intro-h { font-family: "Black Han Sans", "Do Hyeon", "Malgun Gothic", sans-serif; font-weight: 400; letter-spacing: .01em; }
+  #main .intro-card .intro-h .e-s, #main .intro-card .intro-h .e-f, #main .intro-card .intro-h .e-o { color: var(--accent); }
+
+  /* 선택 버튼: 고르기 전에도 칸마다 테두리가 보이게 */
+  .pick { background: none; border: 0; padding: 0; gap: 6px; }
+  .pick span { border: 1px solid var(--line-2); background: var(--paper); color: var(--ink-2); }
+  .pick label:hover span { border-color: var(--accent); color: var(--ink); }
+  .pick input:checked + span { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+  /* 이전·다음, PDF 상자 */
+  .pbtn.primary { background: var(--accent); border-color: var(--accent); }
+  .pdf-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+  .btn-main { font: inherit; font-size: 16px; font-weight: 700; border: 0; border-radius: 12px; padding: 11px 22px; cursor: pointer; background: var(--accent); color: #fff; box-shadow: none; white-space: nowrap; }
+  .btn-main:hover { filter: brightness(1.12); }
+  .btn-main:disabled { opacity: .6; cursor: wait; }
+  .dl { box-shadow: none; }
+  .merge-msg { border-left: 3px solid var(--ok); }
+
+  /* ── 글자 크기: 광고비-매출 v3와 똑같이 ── */
+  body { font-size: 15.5px; }
+  .eyebrow, .task.t1 .eyebrow, .task.t2 .eyebrow, .task.t3 .eyebrow { font-size: .78rem; }
+  .mbtn .no { font-size: .7rem; }
+  #main textarea { font-size: 15.5px; }
+  #main .w { font-size: 12.9px; }
+  .task-banner h2 { font-size: 1.8rem; }
+  .task-banner small { font-size: .8rem; }
+  #main .story p:not(.story-t) { font-size: 15px; }
+  #main .story .story-t { font-size: 15px; }
+  .frame.fill, #main .frame.fill { font-size: 15px; }
+  #main .frame.fill input.fi { font-size: 14px; }
+  .intro-card .intro-h, #main .intro-card .intro-h { font-size: 1.8rem; }
+  #main .intro-card p { font-size: 15.5px; }
+  @media (max-width: 860px) { .task-banner h2, #main .intro-card .intro-h { font-size: 1.45rem; } }
+</style>
+<style>
+  /* 점검 메시지가 없을 때는 빈 줄을 남기지 않음 */
+  .check:empty { display: none; }
+</style>
+<style>
+  /* 11단계 새로운 데이터 예측 표: 낮은 행, 가운데 정렬, 같은 열 너비 */
+  #main table.qt.newp { table-layout: fixed; width: 100%; }
+  #main table.qt.newp th, #main table.qt.newp td { width: 33.33%; text-align: center; vertical-align: middle; padding-top: 5px; padding-bottom: 5px; }
+  #main table.qt.newp td input { display: block; margin: 0 auto; height: 34px; padding-top: 4px; padding-bottom: 4px; text-align: center; }
+</style>
+<style>
+  /* 시작 페이지 소개 제목: '학습지 소개'와 구분되게 본문 글꼴 굵게, 한 줄 */
+  .intro-card .intro-h, #main .intro-card .intro-h { font-family: var(--body); font-weight: 700; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.4; text-wrap: wrap; }
+  @media (max-width: 860px) { #main .intro-card .intro-h { font-size: 1.25rem; } }
+</style>
+<style>
+  /* 숫자 자리 맞춤(같은 너비 숫자) + 데이터 제목 굵기를 문제 제목과 같게 */
+  .df td, .df th, .qt td, .df-shape, input[type=number], .tp-n { font-variant-numeric: tabular-nums; }
+  .ds-name { font-weight: 600; }
+  .sub-t .n, #main .sub-t .n { font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; }  /* (1) 번호는 원래 글꼴 */
+  button, select, textarea, input { font-family: var(--body); }
+</style>
 </head>
 <body>
 <header class="top">
@@ -564,7 +704,7 @@
     </div>
     <div class="prog">채운 칸 <b id="progN">0</b>/<span id="progT">0</span></div>
   </div>
-  <div class="pbar" id="pbar" aria-hidden="true"></div>
+  <div class="tprog" id="tprog" aria-label="과제별 진행률"></div>
 </header>
 
 <div class="wrap">
@@ -575,23 +715,23 @@
       <div class="q-h"><span class="q-num"><span><small>시작</small>0</span></span><h3>학습지 소개</h3></div>
       <div class="head intro-card">
         <div class="head-txt">
-          <h2 class="intro-h"><span class="e-s">수면</span>과 <span class="e-f">식습관</span>으로 보는<br>청소년 <span class="e-o">비만율</span></h2>
+          <h2 class="intro-h"><span class="e-s">수면</span>과 <span class="e-f">식습관</span>으로 보는 청소년 <span class="e-o">비만율</span></h2>
           <p>서울 열린데이터광장의 <b>서울시 청소년 건강 통계</b>를 <b>오렌지3</b>로 분석하면서 채원이의 고민을 해결해 보세요. 적은 내용은 <b>탭이 열려 있는 동안만</b> 저장돼요. 새로고침해도 남아 있지만, 탭이나 브라우저를 닫으면 지워져요.</p>
         </div>
       </div>
       <div class="intro-tasks">
-        <div class="it t1"><b>과제 1</b><span>수면시간에 따른 비만율 확인하기</span><small>통계적 · 단순 선형 회귀 · STEP 1 ~ STEP 6</small></div>
-        <div class="it t2"><b>과제 2</b><span>기계학습 기반으로 회귀 분석하기</span><small>기계학습 · 단순 선형 회귀 · STEP 7 ~ STEP 12</small></div>
-        <div class="it t3"><b>과제 3</b><span>아침식사와 패스트푸드 섭취에 따른 비만율 확인하기</span><small>통계적 · 다중 선형 회귀 · STEP 13 ~ STEP 18</small></div>
+        <div class="it t1"><b>과제 1</b><span>수면시간에 따른 비만율 확인하기</span><small>단순 선형 회귀 (통계적) · 1~6단계</small></div>
+        <div class="it t2"><b>과제 2</b><span>기계학습 기반으로 회귀 분석하기</span><small>단순 선형 회귀 (기계학습 기반) · 7~12단계</small></div>
+        <div class="it t3"><b>과제 3</b><span>아침식사와 패스트푸드 섭취에 따른 비만율 확인하기</span><small>다중 선형 회귀 (통계적) · 13~18단계</small></div>
       </div>
       <p class="q-lead" style="margin-top:16px">왼쪽 목록에서 과제를 골라 차례로 풀어요. 맨 아래 <b>다음</b> 버튼으로 다음 과제로 넘어갈 수도 있어요.</p>
     </section>
 
     <!-- ═════════ 과제 1 ═════════ -->
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>1</span></span><h3>문제 정의하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>1</span></span><h3>문제 정의하기</h3></div>
       <div class="story" data-emoji="">
-      <p class="story-t" data-emoji="">생각 깨우기 · 채원이의 고민</p>
+      <p class="story-t" data-emoji="">채원이의 고민</p>
       <p>새해를 맞아 채원이는 다이어트를 결심했어요. 맛있는 걸 자주 먹다 보니 작년에 입던 교복이 작아졌거든요. 운동은 귀찮고 식단 조절은 어렵고, 굶는 건 금방 포기하게 될 것 같아 더 쉬운 방법을 찾던 중 <b class="hl">"잠이 부족하면 살이 찌기 쉽고, 잘 자면 살이 빠진다"</b>는 이야기를 들었어요.</p>
       <p>생각해 보니 밤을 새운 다음 날이면 유난히 배가 고프고, 과자나 자극적인 음식에 손이 갔던 것 같아요. 정말 그런지 궁금해진 채원이는 직접 데이터를 모아 분석해 보기로 했어요.</p>
     </div>
@@ -608,7 +748,7 @@
     </section>
 
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>2</span></span><h3>데이터 수집하고 합치기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>2</span></span><h3>데이터 수집하고 합치기</h3></div>
       <p class="q-lead">서울 열린데이터광장의 <b>비만율</b> 데이터와 <b>수면시간</b> 데이터를 내려받은 뒤, <span class="w">데이터 병합(열/조인) (Merge Data)</span> 위젯으로 두 데이터를 하나로 합쳐 보세요.</p>
       <div class="ds" data-sets="obese,sleep"></div>
       <div class="sub">
@@ -633,7 +773,7 @@
     </section>
 
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>3</span></span><h3>분석에 필요한 속성 추출하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>3</span></span><h3>분석에 필요한 속성 추출하기</h3></div>
       <p class="q-lead">합친 데이터에서 분석에 필요한 속성만 <span class="w">열 선택 (Select Columns)</span> 위젯으로 골라내 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>열 선택 (Select Columns) 창의 각 칸에 어떤 속성이 들어가야 할까요? 아래 창에 직접 적어 보세요.</p>
@@ -657,8 +797,8 @@
     </section>
 
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>4</span></span><h3>산점도로 상관관계 확인하기</h3></div>
-      <p class="q-lead"><span class="w">산점도 (Scatter Plot)</span> 위젯으로 STEP 1에서 정한 독립 변수와 종속 변수의 상관관계를 확인해 보세요.</p>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>4</span></span><h3>산점도로 상관관계 확인하기</h3></div>
+      <p class="q-lead"><span class="w">산점도 (Scatter Plot)</span> 위젯으로 1단계에서 정한 독립 변수와 종속 변수의 상관관계를 확인해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>상관계수와 상관관계의 방향, 정도를 적어 보세요.</p>
         <p class="corr-guide"><b>정도 기준</b><span class="lv"><i class="s3"></i>|r| ≥ 0.7 강함</span><span class="lv"><i class="s2"></i>0.3 ≤ |r| &lt; 0.7 보통</span><span class="lv"><i class="s1"></i>|r| &lt; 0.3 약함</span></p>
@@ -676,7 +816,7 @@
     </section>
 
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>5</span></span><h3>단순 선형 회귀 분석하고 성능 확인하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>5</span></span><h3>단순 선형 회귀 분석하고 성능 확인하기</h3></div>
       <p class="q-lead"><span class="w">선형회귀 (Linear Regression)</span>로 단순 선형 회귀 모델을 만들고, <span class="w">예측 결과 보기 (Predictions)</span>로 데이터마다 예측값과 성능 점수를 확인해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span><span><span class="w">예측 결과 보기 (Predictions)</span> 표에서 한 행을 골라 적어 보세요.</span></p>
@@ -705,15 +845,15 @@
     </section>
 
     <section class="q task t1">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>6</span></span><h3>결과 해석하고 공유하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>6</span></span><h3>결과 해석하고 공유하기</h3></div>
       <p class="q-lead">분석 결과를 해석하고, 채원이에게 어떤 이야기를 해 줄 수 있을지 정리해 보세요.</p>
       <div class="sub">
-        <p class="sub-t"><span class="n">(1)</span>STEP 4와 STEP 5의 결과를 바탕으로 빈칸을 채워 분석 결과를 해석해 보세요.</p>
+        <p class="sub-t"><span class="n">(1)</span>4단계와 5단계의 결과를 바탕으로 빈칸을 채워 분석 결과를 해석해 보세요.</p>
         <p class="frame fill">독립변수 (<input type="text" class="fi" data-k="t1_f1" style="width:7.5em" aria-label="독립변수" autocomplete="off">)에 의한 종속변수 (<input type="text" class="fi" data-k="t1_f2" style="width:7.5em" aria-label="종속변수" autocomplete="off">)의 상관계수는 (<input type="number" step="any" class="fi" data-k="t1_f3" style="width:6.5em" aria-label="상관계수">)이다.<br>즉, (<input type="text" class="fi" data-k="t1_f4" style="width:7.5em" aria-label="독립변수" autocomplete="off">)이(가) 길어질수록 (<input type="text" class="fi" data-k="t1_f5" style="width:7.5em" aria-label="종속변수" autocomplete="off">)이(가) <span class="pick fi-pick" role="radiogroup" aria-label="높아지는지 낮아지는지"><label><input type="radio" name="t1_fdir" value="높아지는" data-k="t1_fdir"><span>높아지는</span></label><label><input type="radio" name="t1_fdir" value="낮아지는" data-k="t1_fdir"><span>낮아지는</span></label></span> 관계이다.</p>
         <p class="frame fill">독립변수와 종속변수의 결정계수는 (<input type="number" step="any" class="fi" data-k="t1_f6" style="width:6.5em" aria-label="결정계수">)이 나온다.<br>즉, (<input type="text" class="fi" data-k="t1_f7" style="width:7.5em" aria-label="독립변수" autocomplete="off">)가 (<input type="text" class="fi" data-k="t1_f8" style="width:7.5em" aria-label="종속변수" autocomplete="off">) 변화의 약 (<input type="number" step="any" class="fi" data-k="t1_f9" style="width:6.5em" aria-label="백분율">)%를 설명할 수 있다는 의미이다.</p>
         <ul class="fill-tips">
           <li><b>상관계수(r)</b>는 두 변수가 함께 변하는 방향과 정도를, <b>결정계수(R²)</b>는 독립 변수가 종속 변수의 변화를 얼마나 잘 설명하는지 나타내요.</li>
-          <li>방향(높아지는지, 낮아지는지)은 STEP 4의 <b>상관계수 부호</b>를 보고 정해요.</li>
+          <li>방향(높아지는지, 낮아지는지)은 4단계의 <b>상관계수 부호</b>를 보고 정해요.</li>
           <li>R²를 백분율로 바꾸려면 100을 곱해요. 예) 0.5 → 50%</li>
         </ul>
         <div class="check" id="t1FillCheck"></div>
@@ -724,9 +864,9 @@
       </div>
       <div class="sub">
         <p class="sub-t"><span class="n">(3)</span><span>이 과제의 <b>최종 결과</b>를 캡처해 아래 칸에 붙여 넣으세요. 전체 위젯 연결 화면과 예측 결과 보기 (Predictions)의 성능 점수가 <b>한 장에</b> 함께 보이게 캡처해요. (과제마다 1장만 붙여 넣어요)</span></p>
-        <div class="paste" tabindex="0" data-img="t1_img5" role="button" aria-label="과제 1 STEP 6 캡처 붙여넣기 칸">
+        <div class="paste" tabindex="0" data-img="t1_img5" role="button" aria-label="과제 1 6단계 캡처 붙여넣기 칸">
           <div class="paste-empty"><b>여기를 클릭한 뒤 Ctrl+V</b>캡처하기: <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> → 영역을 끌어 고르기<br>이미지 파일을 끌어다 놓아도 돼요.</div>
-          <img class="paste-img" alt="붙여 넣은 과제 1 STEP 5 캡처" hidden>
+          <img class="paste-img" alt="붙여 넣은 과제 1 5단계 캡처" hidden>
         </div>
         <div class="paste-tools"><button type="button" class="btn-sub danger" data-imgdel="t1_img5" hidden>캡처 지우기</button><span class="s-msg" data-imgmsg="t1_img5"></span></div>
       </div>
@@ -744,7 +884,7 @@
 
     <!-- ═════════ 과제 2 · 기계학습 기반 회귀 분석 ═════════ -->
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>7</span></span><h3>훈련 데이터와 테스트 데이터 나누기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>7</span></span><h3>훈련 데이터와 테스트 데이터 나누기</h3></div>
       <p class="q-lead"><span class="w">데이터 샘플링 (Data Sampler)</span> 위젯으로 데이터를 <b>훈련 데이터 70%</b>와 <b>테스트 데이터 30%</b>로 나눠 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>데이터 샘플링 (Data Sampler) 창 아래쪽에 나온 행 수를 적어 보세요.</p>
@@ -763,7 +903,7 @@
     </section>
 
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>8</span></span><h3>모델 학습하고 테스트 데이터로 평가하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>8</span></span><h3>모델 학습하고 테스트 데이터로 평가하기</h3></div>
       <p class="q-lead">훈련 데이터로 <span class="w">선형회귀 (Linear Regression)</span> 모델을 학습시키고, <span class="w">예측 결과 보기 (Predictions)</span> 위젯으로 테스트 데이터를 예측해 성능을 확인해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span><span>예측 결과 보기 (Predictions) 창에 나온 테스트 데이터 중 <b>위에서부터 3줄</b>을 옮겨 적고, 오차를 구해 보세요.</span></p>
@@ -787,18 +927,18 @@
     </section>
 
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>9</span></span><h3>통계적 회귀 분석과 비교하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>9</span></span><h3>통계적 회귀 분석과 비교하기</h3></div>
       <p class="q-lead">과제 1(통계적 회귀 분석)의 결과와 기계학습 기반 회귀 분석의 결과를 비교해 보세요.</p>
       <div class="sub">
-        <p class="sub-t"><span class="n">(1)</span>두 모델의 평가 지표를 비교해 보세요. 과제 1 값은 STEP 5에, 기계학습 값은 STEP 8에 적은 값이 그대로 나와요.</p>
+        <p class="sub-t"><span class="n">(1)</span>두 모델의 평가 지표를 비교해 보세요. 과제 1 값은 5단계에, 기계학습 값은 8단계에 적은 값이 그대로 나와요.</p>
         <div class="tw"><table class="qt">
           <tr><th class="l">모델</th><th>MSE<small>평균제곱오차</small></th><th>MAE<small>평균절대오차</small></th><th>R²<small>결정 계수</small></th></tr>
           <tr><td class="l"><b>과제 1</b><small>통계적 회귀 분석</small></td>
-            <td class="mirror" data-mirror="t1_mse" data-def="STEP 5의 MSE">STEP 5의 MSE</td><td class="mirror" data-mirror="t1_mae" data-def="STEP 5의 MAE">STEP 5의 MAE</td><td class="mirror" data-mirror="t1_r2" data-def="STEP 5의 R²">STEP 5의 R²</td></tr>
+            <td class="mirror" data-mirror="t1_mse" data-def="5단계의 MSE">5단계의 MSE</td><td class="mirror" data-mirror="t1_mae" data-def="5단계의 MAE">5단계의 MAE</td><td class="mirror" data-mirror="t1_r2" data-def="5단계의 R²">5단계의 R²</td></tr>
           <tr><td class="l"><b>과제 2</b><small>기계학습 기반 회귀 분석</small></td>
-            <td class="mirror" data-mirror="t3_mse" data-def="STEP 8의 MSE">STEP 8의 MSE</td>
-            <td class="mirror" data-mirror="t3_mae" data-def="STEP 8의 MAE">STEP 8의 MAE</td>
-            <td class="mirror" data-mirror="t3_r2" data-def="STEP 8의 R²">STEP 8의 R²</td></tr>
+            <td class="mirror" data-mirror="t3_mse" data-def="8단계의 MSE">8단계의 MSE</td>
+            <td class="mirror" data-mirror="t3_mae" data-def="8단계의 MAE">8단계의 MAE</td>
+            <td class="mirror" data-mirror="t3_r2" data-def="8단계의 R²">8단계의 R²</td></tr>
         </table></div>
       </div>
       <div class="sub">
@@ -808,7 +948,7 @@
     </section>
 
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>10</span></span><h3>새로운 데이터 살펴보기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>10</span></span><h3>새로운 데이터 살펴보기</h3></div>
       <p class="q-lead">아래 <b>새로운 데이터</b>를 내려받아 살펴보고, 앞에서 나눈 테스트 데이터와 무엇이 같고 무엇이 다른지 비교해 보세요.</p>
       <div class="ds" data-sets="newdata"></div>
       <div class="sub">
@@ -826,11 +966,11 @@
     </section>
 
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>11</span></span><h3>새로운 데이터로 예측하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>11</span></span><h3>새로운 데이터로 예측하기</h3></div>
       <p class="q-lead">새로운 데이터를 오렌지3로 불러와 앞에서 학습시킨 모델로 예측해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>예측 결과 보기 (Predictions) (1) 창에 나온 예측값을 적어 보세요.</p>
-        <div class="tw"><table class="qt">
+        <div class="tw"><table class="qt newp">
           <thead><tr><th>번호</th><th>독립 변수 값</th><th>예측값<small>선형회귀</small></th></tr></thead>
           <tbody id="t4NewRows"></tbody>
         </table></div>
@@ -843,7 +983,7 @@
     </section>
 
     <section class="q task t2">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>12</span></span><h3>결과 해석하고 공유하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>12</span></span><h3>결과 해석하고 공유하기</h3></div>
       <p class="q-lead">새로운 데이터로 예측한 결과를 해석해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>예측값 가운데 믿을 만한 것과 믿기 어려운 것을 골라 보고, 그렇게 생각한 까닭을 적어 보세요.</p>
@@ -868,9 +1008,9 @@
 
     <!-- ═════════ 과제 3 · 다중 선형 회귀 ═════════ -->
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>13</span></span><h3>문제 정의하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>13</span></span><h3>문제 정의하기</h3></div>
       <div class="story" data-emoji="">
-      <p class="story-t" data-emoji="">생각 깨우기 · 채원이의 남은 고민</p>
+      <p class="story-t" data-emoji="">채원이의 남은 고민</p>
       <p>수면 습관을 바꾸고 효과를 본 채원이는 체중에 영향을 줄 수 있는 다른 생활 습관도 찾아보기로 했어요. 그러다 <b>식습관</b>도 영향을 준다는 이야기를 듣게 되었지요.</p>
       <p>그래서 이번에는 <b>아침 식사</b>와 <b>패스트푸드 섭취</b>가 비만과 어떤 관련이 있는지 직접 데이터로 분석해 보기로 했어요.</p>
     </div>
@@ -888,7 +1028,7 @@
     </section>
 
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>14</span></span><h3>데이터 수집하고 합치기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>14</span></span><h3>데이터 수집하고 합치기</h3></div>
       <p class="q-lead">서울 열린데이터광장의 <b>비만율</b>, <b>수면시간</b>, <b>식생활</b> 데이터를 내려받은 뒤, <span class="w">데이터 병합(열/조인) (Merge Data)</span> 위젯으로 세 데이터를 하나로 합쳐 보세요.</p>
       <div class="ds" data-sets="obese,sleep,diet"></div>
       <div class="sub">
@@ -913,7 +1053,7 @@
     </section>
 
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>15</span></span><h3>분석에 필요한 속성 추출하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>15</span></span><h3>분석에 필요한 속성 추출하기</h3></div>
       <p class="q-lead">합친 데이터에서 분석에 필요한 속성만 <span class="w">열 선택 (Select Columns)</span> 위젯으로 골라내 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>열 선택 (Select Columns) 창의 각 칸에 어떤 속성이 들어가야 할까요? 아래 창에 직접 적어 보세요.</p>
@@ -937,8 +1077,8 @@
     </section>
 
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>16</span></span><h3>산점도로 상관관계 확인하기</h3></div>
-      <p class="q-lead"><span class="w">산점도 (Scatter Plot)</span> 위젯으로 STEP 13에서 정한 두 독립 변수가 각각 종속 변수와 어떤 상관관계가 있는지 확인해 보세요.</p>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>16</span></span><h3>산점도로 상관관계 확인하기</h3></div>
+      <p class="q-lead"><span class="w">산점도 (Scatter Plot)</span> 위젯으로 13단계에서 정한 두 독립 변수가 각각 종속 변수와 어떤 상관관계가 있는지 확인해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span>상관계수와 상관관계의 방향, 정도를 적어 보세요.</p>
         <p class="corr-guide"><b>정도 기준</b><span class="lv"><i class="s3"></i>|r| ≥ 0.7 강함</span><span class="lv"><i class="s2"></i>0.3 ≤ |r| &lt; 0.7 보통</span><span class="lv"><i class="s1"></i>|r| &lt; 0.3 약함</span></p>
@@ -962,7 +1102,7 @@
     </section>
 
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>17</span></span><h3>다중 선형 회귀 분석하고 성능 확인하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>17</span></span><h3>다중 선형 회귀 분석하고 성능 확인하기</h3></div>
       <p class="q-lead">두 속성을 함께 독립 변수로 써서 <span class="w">선형회귀 (Linear Regression)</span>로 다중 선형 회귀 모델을 만들고, <span class="w">예측 결과 보기 (Predictions)</span>로 데이터마다 예측값과 성능 점수를 확인해 보세요. 과제 1의 단순 선형 회귀 모델과도 비교해 보세요.</p>
       <div class="sub">
         <p class="sub-t"><span class="n">(1)</span><span><span class="w">예측 결과 보기 (Predictions)</span> 표에서 한 행을 골라 적어 보세요.</span></p>
@@ -992,16 +1132,16 @@
     </section>
 
     <section class="q task t3">
-      <div class="q-h"><span class="q-num"><span><small>STEP</small>18</span></span><h3>결과 해석하고 공유하기</h3></div>
+      <div class="q-h"><span class="q-num"><span><small>단계</small>18</span></span><h3>결과 해석하고 공유하기</h3></div>
       <p class="q-lead">다중 선형 회귀 분석 결과를 해석하고, 과제 1~3을 통해 알게 된 점을 정리해 보세요.</p>
       <div class="sub">
-        <p class="sub-t"><span class="n">(1)</span>STEP 16과 STEP 17의 결과를 바탕으로 빈칸을 채워 다중 선형 회귀 분석 결과를 해석해 보세요.</p>
+        <p class="sub-t"><span class="n">(1)</span>16단계와 17단계의 결과를 바탕으로 빈칸을 채워 다중 선형 회귀 분석 결과를 해석해 보세요.</p>
         <p class="frame fill">독립변수 1 (<input type="text" class="fi" data-k="t2_f1" style="width:7.5em" aria-label="독립변수 1" autocomplete="off">)에 의한 종속변수 (<input type="text" class="fi" data-k="t2_f2" style="width:7.5em" aria-label="종속변수" autocomplete="off">)의 상관계수는 (<input type="number" step="any" class="fi" data-k="t2_f3" style="width:6.5em" aria-label="상관계수">)이다.<br>즉, (<input type="text" class="fi" data-k="t2_f4" style="width:7.5em" aria-label="독립변수 1" autocomplete="off">)이(가) 높아질수록 (<input type="text" class="fi" data-k="t2_f5" style="width:7.5em" aria-label="종속변수" autocomplete="off">)이(가) <span class="pick fi-pick" role="radiogroup" aria-label="높아지는지 낮아지는지"><label><input type="radio" name="t2_fdir1" value="높아지는" data-k="t2_fdir1"><span>높아지는</span></label><label><input type="radio" name="t2_fdir1" value="낮아지는" data-k="t2_fdir1"><span>낮아지는</span></label></span> 관계이다.</p>
         <p class="frame fill">독립변수 2 (<input type="text" class="fi" data-k="t2_f6" style="width:7.5em" aria-label="독립변수 2" autocomplete="off">)에 의한 종속변수 (<input type="text" class="fi" data-k="t2_f7" style="width:7.5em" aria-label="종속변수" autocomplete="off">)의 상관계수는 (<input type="number" step="any" class="fi" data-k="t2_f8" style="width:6.5em" aria-label="상관계수">)이다.<br>즉, (<input type="text" class="fi" data-k="t2_f9" style="width:7.5em" aria-label="독립변수 2" autocomplete="off">)이(가) 높아질수록 (<input type="text" class="fi" data-k="t2_f10" style="width:7.5em" aria-label="종속변수" autocomplete="off">)이(가) <span class="pick fi-pick" role="radiogroup" aria-label="높아지는지 낮아지는지"><label><input type="radio" name="t2_fdir2" value="높아지는" data-k="t2_fdir2"><span>높아지는</span></label><label><input type="radio" name="t2_fdir2" value="낮아지는" data-k="t2_fdir2"><span>낮아지는</span></label></span> 관계이다.</p>
         <p class="frame fill">두 독립변수와 종속변수의 결정계수는 (<input type="number" step="any" class="fi" data-k="t2_f11" style="width:6.5em" aria-label="결정계수">)이 나온다.<br>즉, (<input type="text" class="fi" data-k="t2_f12" style="width:7.5em" aria-label="독립변수 1" autocomplete="off">)와(과) (<input type="text" class="fi" data-k="t2_f13" style="width:7.5em" aria-label="독립변수 2" autocomplete="off">)가 함께 (<input type="text" class="fi" data-k="t2_f14" style="width:7.5em" aria-label="종속변수" autocomplete="off">) 변화의 약 (<input type="number" step="any" class="fi" data-k="t2_f15" style="width:6.5em" aria-label="백분율">)%를 설명할 수 있다는 의미이다.</p>
         <ul class="fill-tips">
           <li><b>상관계수(r)</b>는 두 변수가 함께 변하는 방향과 정도를, <b>결정계수(R²)</b>는 독립 변수들이 종속 변수의 변화를 얼마나 잘 설명하는지 나타내요. 다중 선형 회귀의 결정계수는 두 독립 변수를 <b>함께</b> 사용했을 때의 설명력이에요.</li>
-          <li>방향(높아지는지, 낮아지는지)은 STEP 16에서 적은 두 독립 변수 각각의 <b>상관계수 부호</b>를 보고 정해요.</li>
+          <li>방향(높아지는지, 낮아지는지)은 16단계에서 적은 두 독립 변수 각각의 <b>상관계수 부호</b>를 보고 정해요.</li>
           <li>R²를 백분율로 바꾸려면 100을 곱해요. 예) 0.5 → 50%</li>
         </ul>
         <div class="check" id="t2FillCheck"></div>
@@ -1125,7 +1265,7 @@ Object.keys(SETS).forEach(k => {
 });
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-// STEP 2의 데이터 상자: 탭(파일이 여럿일 때) + 출처 + 내려받기 + 데이터프레임 표
+// 2단계의 데이터 상자: 탭(파일이 여럿일 때) + 출처 + 내려받기 + 데이터프레임 표
 document.querySelectorAll(".ds").forEach((box, bi) => {
   const keys = box.dataset.sets.split(",");
   const tabs = keys.length > 1
@@ -1166,7 +1306,7 @@ document.querySelectorAll(".ds").forEach((box, bi) => {
   });
 });
 
-// 과제 2 STEP 8 표(테스트 데이터 중 TEST_ROWS줄)와 STEP 11 표(새로운 데이터 행마다 한 줄)
+// 과제 2 8단계 표(테스트 데이터 중 TEST_ROWS줄)와 11단계 표(새로운 데이터 행마다 한 줄)
 const TEST_ROWS = 3, NEW_X = SETS.newdata.body.map(r => r[0]);
 const numIn = (k, ph, label) => `<input type="number" step="any" data-k="${k}" placeholder="${ph}" aria-label="${label}">`;
 document.getElementById("t3TestRows").innerHTML = Array.from({ length: TEST_ROWS }, (_, j) => { const i = j + 1;
@@ -1205,22 +1345,22 @@ function msg(id, text, cls = "warn") { const el = document.getElementById(id); i
 const norm = s => (s || "").replace(/\s/g, "");
 const lines = k => (state[k] || "").split("\n").map(norm).filter(Boolean);
 const has = (arr, v) => arr.some(a => a === v || v.startsWith(a) || a.startsWith(v));
-// STEP 1: 독립 변수와 종속 변수는 서로 달라야 함
+// 1단계: 독립 변수와 종속 변수는 서로 달라야 함
 function checkRoles(id, keys) {
   const vs = keys.map(k => norm(state[k])).filter(Boolean);
   msg(id, new Set(vs).size < vs.length ? "독립 변수와 종속 변수는 모두 서로 다른 속성이어야 해요." : "");
 }
-// STEP 3: 문제 정의 STEP에서 정한 변수와 맞는지
+// 3단계: 문제 정의 단계에서 정한 변수와 맞는지
 function checkSelect(id, p, xKeys, yKey, kind) {
   const feat = lines(p + "_feat"), tgt = lines(p + "_tgt"), ign = lines(p + "_ign"), out = [];
   const y = norm(state[yKey]);
   if (tgt.length > 1) out.push(`${kind}에서도 Target은 하나만 둬요.`);
-  if (y && tgt.length && !has(tgt, y)) out.push("Target이 문제 정의 STEP에서 정한 종속 변수와 같은지 확인해 보세요.");
-  if (feat.length && xKeys.some(k => norm(state[k]) && !has(feat, norm(state[k])))) out.push("Features에 문제 정의 STEP에서 정한 독립 변수가 모두 들어 있는지 확인해 보세요.");
+  if (y && tgt.length && !has(tgt, y)) out.push("Target이 문제 정의 단계에서 정한 종속 변수와 같은지 확인해 보세요.");
+  if (feat.length && xKeys.some(k => norm(state[k]) && !has(feat, norm(state[k])))) out.push("Features에 문제 정의 단계에서 정한 독립 변수가 모두 들어 있는지 확인해 보세요.");
   if ([...feat, ...tgt].some(v => has(ign, v))) out.push("같은 속성이 Ignored와 다른 칸에 함께 적혀 있어요.");
   msg(id, out.join(" "));
 }
-// STEP 4: r의 범위, 부호와 방향, |r|과 정도
+// 4단계: r의 범위, 부호와 방향, |r|과 정도
 function checkCorr(id, rows) {
   const out = [];
   rows.forEach(([rk, sk, gk, label]) => {
@@ -1234,7 +1374,7 @@ function checkCorr(id, rows) {
   });
   msg(id, out.join(" "));
 }
-// STEP 5: 오차 지표는 음수가 아님, RMSE = √MSE, R² ≤ 1
+// 5단계: 오차 지표는 음수가 아님, RMSE = √MSE, R² ≤ 1
 function checkMetrics(id, p) {
   const v = k => num(p + "_" + k), out = [];
   if (["mse", "rmse", "mae", "mape", "smape"].some(k => v(k) !== null && v(k) < 0)) out.push("오차 지표는 0보다 작을 수 없어요.");
@@ -1243,7 +1383,7 @@ function checkMetrics(id, p) {
   if (v("r2") !== null && v("r2") > 1) out.push("R²는 1보다 클 수 없어요.");
   msg(id, out.join(" "));
 }
-// STEP 2: '시점'을 기준으로 두 CSV를 합친 결과 (오렌지3 Merge Data의 Inner Join과 같음)
+// 2단계: '시점'을 기준으로 두 CSV를 합친 결과 (오렌지3 Merge Data의 Inner Join과 같음)
 document.querySelectorAll(".merge-ok").forEach(box => {
   // 첫 번째 데이터에 나머지를 차례로 붙임 (데이터가 셋이면 Merge Data를 두 번 쓴 것과 같음)
   const [a, ...others] = box.dataset.sets.split(",").map(k => SETS[k]);
@@ -1261,14 +1401,14 @@ document.querySelectorAll(".merge-ok").forEach(box => {
 });
 const isKey = v => norm(v).replace(/["'“”‘’()]/g, "") === "시점";
 
-// 과제 2 STEP 7: 훈련 + 테스트 = 전체, 훈련 데이터는 전체의 약 70%
+// 과제 2 7단계: 훈련 + 테스트 = 전체, 훈련 데이터는 전체의 약 70%
 function checkSplit(id) {
   const n = num("t3_n"), tr = num("t3_ntr"), te = num("t3_nte"), out = [];
   if (n !== null && tr !== null && te !== null && tr + te !== n) out.push("훈련 데이터와 테스트 데이터의 행 수를 더하면 전체 행 수와 같아야 해요.");
   else if (n && tr !== null && Math.abs(tr - n * 0.7) > 1) out.push("훈련 데이터가 전체의 약 70%인지 확인해 보세요.");
   msg(id, out.join(" "));
 }
-// 과제 2 STEP 8: 오차 = 예측값 − 실제 값 (예측 결과 보기의 error와 같음. 창의 값은 반올림돼 있어서 조금은 봐줌)
+// 과제 2 8단계: 오차 = 예측값 − 실제 값 (예측 결과 보기의 error와 같음. 창의 값은 반올림돼 있어서 조금은 봐줌)
 function checkErr(id) {
   const bad = [];
   for (let i = 1; i <= TEST_ROWS; i++) {
@@ -1277,7 +1417,7 @@ function checkErr(id) {
   }
   msg(id, bad.length ? `${bad.join(", ")}번 줄: 오차가 '예측값 − 실제 값'과 맞는지 확인해 보세요.` : "");
 }
-// 과제 2 STEP 11: 같은 모델의 예측값은 모두 한 직선 위에 있어야 함
+// 과제 2 11단계: 같은 모델의 예측값은 모두 한 직선 위에 있어야 함
 function checkLine(id) {
   const pts = NEW_X.map((x, j) => [Number(x), num("t4_p" + (j + 1))]).filter(p => p[1] !== null);
   if (pts.length < 3) return msg(id, "");
@@ -1287,7 +1427,7 @@ function checkLine(id) {
 }
 function checkAll() {
   ["t1", "t2"].forEach(t => { const el = document.getElementById(t + "MergeOk"); if (el) el.hidden = !isKey(state[t + "_key"]); });
-  // 상관계수·평가 지표 표의 변수 이름: 학생이 문제 정의 STEP에 적은 값을 그대로 보여 줌
+  // 상관계수·평가 지표 표의 변수 이름: 학생이 문제 정의 단계에 적은 값을 그대로 보여 줌
   document.querySelectorAll("[data-role]").forEach(el => {
     el.textContent = (state[el.dataset.role] || "").trim() || el.dataset.def;
   });
@@ -1295,7 +1435,7 @@ function checkAll() {
   checkSelect("t1SelCheck", "t1", ["t1_x"], "t1_y", "단순 선형 회귀");
   checkCorr("t1CorrCheck", [["t1_r", "t1_sign", "t1_str", ""]]);
   checkMetrics("t1MetricCheck", "t1");
-  { // STEP 6 빈칸: 상관계수 부호와 방향, 결정계수와 백분율이 서로 맞는지
+  { // 6단계 빈칸: 상관계수 부호와 방향, 결정계수와 백분율이 서로 맞는지
     const r = num("t1_f3"), d = state.t1_fdir, r2 = num("t1_f6"), pc = num("t1_f9"), out = [];
     if (r !== null && d && r !== 0 && ((r > 0) !== (d === "높아지는"))) out.push("상관계수의 부호와 고른 방향(높아지는/낮아지는)이 맞는지 확인해 보세요.");
     if (r2 !== null && pc !== null && Math.abs(r2 * 100 - pc) > 1) out.push(`결정계수 ${r2}를 백분율로 바꾸면 약 ${+(r2 * 100).toFixed(1)}%예요.`);
@@ -1308,7 +1448,7 @@ function checkAll() {
   checkMetrics("t2MetricCheck", "t2");
   { const a = num("t2_pa"), q = num("t2_pp"), e = num("t2_pe");
     msg("t2PredCheck", a !== null && q !== null && e !== null && Math.abs(e - (q - a)) > 0.11 ? "error는 '예측값 − 실제값'이에요. 옮겨 적은 값이 맞는지 확인해 보세요." : ""); }
-  { // STEP 18 빈칸: 상관계수 부호와 방향, 결정계수와 백분율
+  { // 18단계 빈칸: 상관계수 부호와 방향, 결정계수와 백분율
     const out = [];
     [["t2_f3", "t2_fdir1", "첫째 문장"], ["t2_f8", "t2_fdir2", "둘째 문장"]].forEach(([rk, dk, nm]) => {
       const r = num(rk), d = state[dk];
@@ -1317,7 +1457,7 @@ function checkAll() {
     const r2 = num("t2_f11"), pc = num("t2_f15");
     if (r2 !== null && pc !== null && Math.abs(r2 * 100 - pc) > 1) out.push(`결정계수 ${r2}를 백분율로 바꾸면 약 ${+(r2 * 100).toFixed(1)}%예요.`);
     msg("t2FillCheck", out.join(" ")); }
-  // 과제 2 STEP 9 표: STEP 5·STEP 8에 적은 값을 그대로 보여 줌
+  // 과제 2 9단계 표: 5단계·8단계에 적은 값을 그대로 보여 줌
   document.querySelectorAll("[data-mirror]").forEach(el => {
     el.textContent = String(state[el.dataset.mirror] ?? "").trim() || el.dataset.def;
   });
@@ -1412,10 +1552,10 @@ TASKS.forEach(([t, title, kind, names], ti) => {
   const pg = { no: t, nm: title, kind, p: ti + 1, secs: [], chs: [] };
   names.forEach(nm => { const n = ++chN; pg.secs.push(n); pg.chs.push({ n, nm }); });
   PAGES.push(pg);
-  // 과제 머리띠 + STEP마다 작은 머리글
+  // 과제 머리띠 + 단계마다 작은 머리글
   const first = SECS[pg.secs[0]];
-  first.insertAdjacentHTML("beforebegin", `<div class="task-banner t${ti + 1}" data-page="${PAGES.length - 1}"><b>${t}</b><h2>${title}</h2><small>${kind} · STEP ${pg.chs[0].n} ~ STEP ${pg.chs[pg.chs.length - 1].n}</small></div>`);
-  pg.secs.forEach((si, k) => { SECS[si].id = "ch" + pg.chs[k].n; SECS[si].querySelector(".q-h").insertAdjacentHTML("afterbegin", `<p class="eyebrow">STEP ${pg.chs[k].n}</p>`); });
+  first.insertAdjacentHTML("beforebegin", `<div class="task-banner t${ti + 1}" data-page="${PAGES.length - 1}"><b>${t}</b><h2>${title}</h2><small>${kind} · ${pg.chs[0].n}~${pg.chs[pg.chs.length - 1].n}단계</small></div>`);
+  pg.secs.forEach((si, k) => { SECS[si].id = "ch" + pg.chs[k].n; SECS[si].querySelector(".q-h").insertAdjacentHTML("afterbegin", `<p class="eyebrow">${t} · ${pg.chs[k].n}단계</p>`); });
 });
 const BANNERS = [...document.querySelectorAll(".task-banner")];
 // 채울 칸 세기 (라디오는 묶음 하나가 한 칸, 캡처 칸 포함, 내려받기 버튼 제외)
@@ -1430,21 +1570,25 @@ const filled = k => String(state[k] ?? "").trim() !== "";
 let CUR = 0, CURCH = 0;
 try { CUR = Math.min(PAGES.length - 1, Math.max(0, Number(sessionStorage.getItem(KEY + "-p")) || 0)); } catch (e) {}
 const stOf = ks => { const n = ks.filter(filled).length; return ks.length ? `<span class="st ${n === ks.length ? "full" : ""}">${n === ks.length ? "✓" : `${n}/${ks.length}`}</span>` : `<span class="st"></span>`; };
+const two = n => String(n).padStart(2, "0");
 function renderNav() {
-  let html = "<ol>";
+  let html = `<ol><li class="phase"><b>시작</b>학습지 소개</li><li><button type="button" class="mbtn" data-go="0" aria-current="${CUR === 0}"><span class="no">00</span><span class="nm">학습지 소개</span><span class="st"></span></button></li>`;
   PAGES.forEach((pg, i) => {
-    html += `<li><button type="button" class="mbtn pg${pg.p ? " p" + pg.p : ""}" data-go="${i}" aria-current="${i === CUR}"><span class="no">${pg.no}</span><span class="nm">${pg.nm}${pg.kind ? `<small>${pg.kind}</small>` : ""}</span>${stOf(pageSlots(pg))}</button>`;
-    if (i === CUR && pg.chs.length) html += `<ol class="chs">${pg.chs.map((c, k) => `<li><button type="button" class="cbtn" data-ch="${c.n}" aria-current="${c.n === CURCH}"><span>STEP ${c.n}</span>${c.nm}${stOf(slots(SECS[pg.secs[k]]))}</button></li>`).join("")}</ol>`;
-    html += "</li>";
+    if (!pg.p) return;
+    html += `<li class="phase"><b>${pg.no}</b>${pg.kind}</li>`;
+    pg.chs.forEach((c, k) => {
+      html += `<li><button type="button" class="mbtn" data-go="${i}" data-ch="${c.n}" aria-current="${i === CUR && c.n === CURCH}"><span class="no">${two(c.n)}</span><span class="nm">${c.nm}</span>${stOf(slots(SECS[pg.secs[k]]))}</button></li>`;
+    });
   });
   $("#nav").innerHTML = html + "</ol>";
 }
 function updateProg() {
   const all = SECS.flatMap(slots), n = all.filter(filled).length;
   $("#progN").textContent = n; $("#progT").textContent = all.length;
-  $("#pbar").innerHTML = PAGES.filter(pg => pg.p).map(pg => {
-    const ks = pageSlots(pg), f = ks.filter(filled).length;
-    return `<div class="seg s${pg.p}"><span>${pg.no}<b>${f}/${ks.length}</b></span><div class="track"><div class="fill" style="width:${ks.length ? f / ks.length * 100 : 0}%"></div></div></div>`;
+  const SHORT = { 1: "단순 회귀 (통계적)", 2: "기계학습 회귀", 3: "다중 회귀 (통계적)" };
+  $("#tprog").innerHTML = PAGES.filter(pg => pg.p).map(pg => {
+    const ks = pageSlots(pg), k = ks.filter(filled).length, pct = ks.length ? Math.round(k / ks.length * 100) : 0;
+    return `<div class="tp ${pct === 100 ? "done" : ""}"><b>${pg.no}</b><span class="tp-nm">${SHORT[pg.p]}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="tp-n">${pct}%</span></div>`;
   }).join("");
   renderNav();
 }
@@ -1462,13 +1606,21 @@ function go(i, scroll = true) {
   setTimeout(spy, 0);
 }
 $("#nav").addEventListener("click", e => {
-  const b = e.target.closest("[data-go]"); if (b) return go(Number(b.dataset.go));
-  const c = e.target.closest("[data-ch]"); if (c) document.getElementById("ch" + c.dataset.ch).scrollIntoView({ behavior: "smooth", block: "start" });
+  const b = e.target.closest("[data-go]"); if (!b) return;
+  const pg = Number(b.dataset.go), ch = b.dataset.ch;
+  const other = pg !== CUR;
+  if (other) go(pg, !ch);
+  if (!ch) return;
+  CURCH = Number(ch); renderNav();
+  const el = document.getElementById("ch" + ch);
+  // 다른 과제로 넘어갈 때는 화면이 바뀐 뒤에 그 단계로 내려감
+  if (other) setTimeout(() => { el.scrollIntoView({ block: "start" }); spy(); }, 30);
+  else el.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 $("#prevBtn").addEventListener("click", () => go(CUR - 1));
 $("#nextBtn").addEventListener("click", () => go(CUR + 1));
 document.addEventListener("input", () => setTimeout(updateProg, 0));
-// 스크롤 위치에 따라 지금 보고 있는 STEP 표시
+// 스크롤 위치에 따라 지금 보고 있는 단계 표시
 function spy() {
   const pg = PAGES[CUR]; if (!pg.chs.length) return;
   let cur = pg.chs[0].n;
@@ -1476,7 +1628,7 @@ function spy() {
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = pg.chs[pg.chs.length - 1].n;
   if (cur === CURCH) return;
   CURCH = cur;
-  document.querySelectorAll(".cbtn").forEach(b => b.setAttribute("aria-current", Number(b.dataset.ch) === CURCH));
+  document.querySelectorAll(".mbtn[data-ch]").forEach(b => b.setAttribute("aria-current", Number(b.dataset.go) === CUR && Number(b.dataset.ch) === CURCH));
 }
 let spyT = null;
 window.addEventListener("scroll", () => { if (!spyT) spyT = setTimeout(() => { spyT = null; spy(); }, 60); }, { passive: true });
