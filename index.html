@@ -446,6 +446,7 @@
   #main .story .story-t::before { content: attr(data-emoji); font-size: 18px; line-height: 1; }
   #main .story .story-t::after { content: "생각 깨우기"; font-size: .7rem; font-weight: 700; letter-spacing: .06em; padding: 2px 8px; border-radius: 4px; background: var(--c-weak, var(--accent-weak)); color: var(--c); }
   #main .story.after .story-t::after { content: "이야기"; }
+  #main .story .story-t::after { order: -1; }  /* 생각 깨우기·이야기 이름표를 제목 왼쪽에 */
   #main .story p:not(.story-t) { margin: 0; padding: 10px 16px 0; font-family: var(--body); font-size: 15.5px; line-height: 1.75; -webkit-text-stroke: 0; }
   #main .story b { font-weight: 700; }
   #main .story p:last-child { padding-bottom: 14px; }
@@ -682,7 +683,7 @@
 </style>
 <style>
   /* 시작 페이지 소개 제목: '학습지 소개'와 구분되게 본문 글꼴 굵게, 한 줄 */
-  .intro-card .intro-h, #main .intro-card .intro-h { font-family: var(--body); font-weight: 700; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.4; text-wrap: wrap; }
+  .intro-card .intro-h, #main .intro-card .intro-h { font-family: var(--body); font-weight: 700; font-size: 1.5rem; letter-spacing: normal; line-height: 1.4; text-wrap: wrap; }
   @media (max-width: 860px) { #main .intro-card .intro-h { font-size: 1.25rem; } }
 </style>
 <style>
